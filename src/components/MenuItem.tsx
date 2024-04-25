@@ -1,5 +1,5 @@
 import { menuItem, menuProps } from "../Types/Cart";
-import { NavLink } from "react-router-dom";
+import { Link } from "@tanstack/react-router";
 import { useAppDispatch, useAppSelector } from "../hooks";
 import { addtocart } from "../../CartSlice";
 
@@ -11,6 +11,7 @@ export default function MenuItems({ menu }: menuProps) {
     const newItem = {
       id: data.id,
       name: data.name,
+      totalPrice: data.unitPrice,
       imageUrl: data.imageUrl,
       quantity: 1,
       unitPrice: data.unitPrice,
@@ -20,7 +21,7 @@ export default function MenuItems({ menu }: menuProps) {
   return (
     <div>
       {menu.map((data) => (
-        <div className="w-1/2 mx-auto my-2">
+        <div key={data.id} className="w-1/2 mx-auto my-2">
           <div
             key={data.id}
             className="bg-white border-b-2 flex items-center  justify-between"
@@ -35,6 +36,7 @@ export default function MenuItems({ menu }: menuProps) {
                 <p>price:{data.unitPrice} $</p>
               </div>
             </div>
+
             <button
               onClick={() => handleAdd(data)}
               className="bg-yellow-500 rounded-md h-8 font-semibold w-32 text-sm "
@@ -45,9 +47,9 @@ export default function MenuItems({ menu }: menuProps) {
         </div>
       ))}
 
-      <div className="flex items-center justify-between bg-stone-800 px-4 py-4 text-sm uppercase text-stone-200 sm:px-6 md:text-base">
-        <NavLink to="/cart">Open cart &rarr;</NavLink>
-      </div>
+      {/* <div className="flex items-center justify-between bg-stone-800 px-4 py-4 text-sm uppercase text-stone-200 sm:px-6 md:text-base">
+        <Link to="/cart">Open cart &rarr;</Link>
+      </div> */}
     </div>
   );
 }

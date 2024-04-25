@@ -1,13 +1,22 @@
-import { configureStore } from "@reduxjs/toolkit";
+import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import userReducer from "./User";
 import cartReducer from "./CartSlice";
-const store = configureStore({
-  reducer: {
-    user: userReducer,
-    cart: cartReducer,
-  },
-});
+import storage from "redux-persist/lib/storage";
+import { persistStore, persistReducer } from "redux-persist";
 
+const persistConfig = {
+  key: "root",
+  storage,
+};
+const reducer = combineReducers({
+  cart: cartReducer,
+  user: userReducer,
+});
+const persistedReducer = persistReducer(persistConfig, reducer);
+const store = configureStore({
+  reducer: persistedReducer,
+});
+export const persister = persistStore(store);
 export default store;
 export type RootState = ReturnType<typeof store.getState>;
 // Inferred type: {posts: PostsState, comments: CommentsState, users: UsersState}

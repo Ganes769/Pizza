@@ -3,6 +3,7 @@ export interface menuItem {
   name: string;
   unitPrice: number;
   soldOut: boolean;
+  totalPrice: number;
   imageUrl: string;
   quantity: number;
 }
