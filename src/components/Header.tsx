@@ -1,7 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "@tanstack/react-router";
 import { clearName } from "../../User";
-// import { clearName } from "../../User";
 export default function Header() {
   const username = useSelector((state: any) => state.user.username);
   const dispatch = useDispatch();

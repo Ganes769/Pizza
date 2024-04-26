@@ -1,8 +1,8 @@
 import { menuItem, menuProps } from "../Types/type";
 
-import { useAppDispatch, useAppSelector } from "../hooks";
+import { useAppDispatch } from "../hooks";
 import { addtocart } from "../../CartSlice";
-import toast, { Toaster } from "react-hot-toast";
+import { toast } from "react-hot-toast";
 
 export default function MenuItems({ menu }: menuProps) {
   const dispatch = useAppDispatch();

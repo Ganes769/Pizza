@@ -6,6 +6,6 @@ interface updatenNameAction {
 }
 export const updateName = (name: string) => ({
   type: UserActionTypes.UPDATE_NAME,
-  payload:name
+  payload: name,
 });
 export type Action = updatenNameAction;

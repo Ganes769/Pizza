@@ -1,6 +1,5 @@
 import Header from "./Header";
-import { Provider } from "react-redux";
-import store from "../../store";
+
 import { Outlet } from "@tanstack/react-router";
 import { useAppSelector } from "../hooks";
 import { Link } from "@tanstack/react-router";

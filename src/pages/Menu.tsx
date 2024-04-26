@@ -3,8 +3,6 @@ import { menuItem } from "../Types/type";
 import { useAppSelector } from "../hooks";
 import MenuItems from "../components/MenuItem";
 export default function Menu() {
-  const cart = useAppSelector((state) => state.cart.cart);
-
   const [menu, setMenu] = useState<menuItem[]>([]);
 
   useEffect(() => {
