@@ -10,7 +10,6 @@ import toast from "react-hot-toast";
 export default function Login() {
   const dispatch = useAppDispatch();
   const userName = useAppSelector((state) => state.user.username);
-  console.log(userName);
 
   const navigate = useNavigate();
   const [user, setUser] = useState<string>("");
@@ -18,10 +17,8 @@ export default function Login() {
     firstname: string;
     lastname: string;
     maxCapacity: number;
-    email: string;
   };
   const schema: z.ZodType<FormData> = z.object({
-    email: z.string(),
     firstname: z.string().min(1, { message: "First name is required" }),
     lastname: z.string().min(1, { message: "Last name is required" }),
     maxCapacity: z
@@ -31,9 +28,9 @@ export default function Login() {
   });
 
   function onSubmit(data: FormData) {
-    console.log(data);
     dispatch(updateName(data.firstname));
     toast.success(`Hello ${user}`);
+    console.log(data);
     navigate({
       to: "/menu",
     });
@@ -44,6 +41,7 @@ export default function Login() {
     resolver: zodResolver(schema),
   });
   const { errors } = formState;
+  console.log(errors);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -58,10 +56,10 @@ export default function Login() {
         <div className="p-2">
           <input
             {...register("firstname")}
-            id="firstname"
-            className="input  w-72"
+            id="lastname"
+            className="input w-72"
             type="text"
-            placeholder="enter your firstname"
+            placeholder="enter your last name"
           />
           {errors.firstname && (
             <p className="mt-2 rounded-md bg-red-100 p-2 text-xs text-red-700">

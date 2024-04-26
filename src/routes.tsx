@@ -18,6 +18,7 @@ const menuRoute = createRoute({
   component: Menu,
   getParentRoute: () => rootRoute,
 });
+
 const cartRoute = createRoute({
   path: "/cart",
   component: Cart,
