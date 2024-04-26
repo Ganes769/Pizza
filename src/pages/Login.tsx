@@ -18,8 +18,10 @@ export default function Login() {
     firstname: string;
     lastname: string;
     maxCapacity: number;
+    email: string;
   };
   const schema: z.ZodType<FormData> = z.object({
+    email: z.string(),
     firstname: z.string().min(1, { message: "First name is required" }),
     lastname: z.string().min(1, { message: "Last name is required" }),
     maxCapacity: z
