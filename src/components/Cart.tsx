@@ -1,7 +1,6 @@
 import { useSelector } from "react-redux";
+import { cartSliceType } from "../Types/type";
 import {
-  addToCartType,
-  cartSliceType,
   cleaarcart,
   decreaseQuantity,
   deleteItem,
@@ -16,9 +15,8 @@ export default function Cart() {
   const dispatch = useAppDispatch();
   const username = useAppSelector((state) => state.user.username);
   const cart = useSelector(getcart);
-  console.log(cart);
   const totalPrice = useSelector(totalCartPrice);
-  console.log(totalPrice);
+
   return (
     <div className="px-4 py-3">
       {cart.length > 0 ? (
@@ -61,6 +59,9 @@ export default function Cart() {
               <h4 className="mr-">{totalPrice}$</h4>
             </div>
           </ul>
+          <button onClick={() => dispatch(cleaarcart())} className="btn mt-4">
+            Clear Cart
+          </button>
         </div>
       ) : (
         <EmptyCart />

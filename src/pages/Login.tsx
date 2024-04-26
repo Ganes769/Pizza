@@ -5,6 +5,7 @@ import { useAppSelector, useAppDispatch } from "../hooks";
 import { SubmitHandler, useForm } from "react-hook-form";
 import * as z from "zod";
 import { useNavigate } from "@tanstack/react-router";
+import toast from "react-hot-toast";
 
 export default function Login() {
   const dispatch = useAppDispatch();
@@ -29,8 +30,8 @@ export default function Login() {
 
   function onSubmit(data: FormData) {
     console.log(data);
-    dispatch(updateName(user));
-
+    dispatch(updateName(data.firstname));
+    toast.success(`Hello ${user}`);
     navigate({
       to: "/menu",
     });
@@ -54,11 +55,9 @@ export default function Login() {
         </h1>
         <div className="p-2">
           <input
-            value={user}
             {...register("firstname")}
             id="firstname"
             className="input  w-72"
-            onChange={(e) => setUser(e.target.value)}
             type="text"
             placeholder="enter your firstname"
           />

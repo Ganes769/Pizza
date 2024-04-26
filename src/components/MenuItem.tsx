@@ -1,11 +1,10 @@
-import { menuItem, menuProps } from "../Types/Cart";
-import { Link } from "@tanstack/react-router";
+import { menuItem, menuProps } from "../Types/type";
+
 import { useAppDispatch, useAppSelector } from "../hooks";
 import { addtocart } from "../../CartSlice";
+import toast, { Toaster } from "react-hot-toast";
 
 export default function MenuItems({ menu }: menuProps) {
-  // const { id } = menu;
-  // const currentQuantity = useAppSelector(getcurrentQuantitybyId(id));
   const dispatch = useAppDispatch();
   function handleAdd(data: menuItem) {
     const newItem = {
@@ -17,6 +16,11 @@ export default function MenuItems({ menu }: menuProps) {
       unitPrice: data.unitPrice,
     };
     dispatch(addtocart(newItem));
+    if (newItem) {
+      toast.success("Added Successfully");
+    } else {
+      return;
+    }
   }
   return (
     <div>
@@ -46,10 +50,6 @@ export default function MenuItems({ menu }: menuProps) {
           </div>
         </div>
       ))}
-
-      {/* <div className="flex items-center justify-between bg-stone-800 px-4 py-4 text-sm uppercase text-stone-200 sm:px-6 md:text-base">
-        <Link to="/cart">Open cart &rarr;</Link>
-      </div> */}
     </div>
   );
 }

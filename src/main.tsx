@@ -22,6 +22,7 @@ import { routeTree } from "./routes";
 import { Provider } from "react-redux";
 import store from "../store";
 import { PersistGate } from "redux-persist/integration/react";
+import { Toaster } from "react-hot-toast";
 
 // Create a new router instance
 const router = createRouter({ routeTree });
@@ -43,6 +44,27 @@ if (!rootElement.innerHTML) {
         <PersistGate persistor={persister}>
           <RouterProvider router={router} />
         </PersistGate>
+        <Toaster
+          toastOptions={{
+            success: {
+              duration: 3000,
+            },
+            error: {
+              duration: 5000,
+            },
+            style: {
+              fontSize: "16px",
+              maxWidth: "500px",
+              padding: "16px 24px",
+              backgroundColor: "[#4c3e3e]",
+              color: "black",
+            },
+          }}
+          position="top-center"
+          reverseOrder={false}
+          gutter={12}
+          containerStyle={{ margin: "8px" }}
+        />
       </Provider>
     </StrictMode>
   );
