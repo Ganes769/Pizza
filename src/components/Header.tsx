@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "@tanstack/react-router";
+import { clearName } from "../../User";
 // import { clearName } from "../../User";
 export default function Header() {
   const username = useSelector((state: any) => state.user.username);
@@ -13,7 +14,15 @@ export default function Header() {
       ) : (
         <h4>Hello React Co..</h4>
       )}
-      <h2>{username}</h2>
+      <div className="flex">
+        <h2>{username}</h2>
+        <p
+          className="cursor-pointer ml-3"
+          onClick={() => dispatch(clearName())}
+        >
+          clear name
+        </p>
+      </div>
     </nav>
   );
 }

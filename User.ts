@@ -13,7 +13,10 @@ const userSlice = createSlice({
     updateName(state = intistate, action) {
       state.username = action.payload;
     },
+    clearName(state = intistate) {
+      state.username = "";
+    },
   },
 });
-export const { updateName } = userSlice.actions;
+export const { updateName, clearName } = userSlice.actions;
 export default userSlice.reducer;

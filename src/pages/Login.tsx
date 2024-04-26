@@ -29,8 +29,8 @@ export default function Login() {
 
   function onSubmit(data: FormData) {
     dispatch(updateName(data.firstname));
-    toast.success(`Hello ${user}`);
-    console.log(data);
+    toast.success(`Hello ${data.firstname}`);
+
     navigate({
       to: "/menu",
     });
