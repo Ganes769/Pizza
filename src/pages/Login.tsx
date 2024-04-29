@@ -1,18 +1,14 @@
-import { FormEvent, useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { updateName } from "../../User";
 import { useAppSelector, useAppDispatch } from "../hooks";
-import { SubmitHandler, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { useNavigate } from "@tanstack/react-router";
 import toast from "react-hot-toast";
 
 export default function Login() {
   const dispatch = useAppDispatch();
-  const userName = useAppSelector((state) => state.user.username);
-
   const navigate = useNavigate();
-  const [user, setUser] = useState<string>("");
   type FormData = {
     firstname: string;
     lastname: string;
@@ -55,10 +51,10 @@ export default function Login() {
         </h1>
         <div className="p-2">
           <input
+            className="input"
             {...register("firstname")}
-            id="lastname"
-            className="input w-72"
             type="text"
+            id="lastname"
             placeholder="enter your last name"
           />
           {errors.firstname && (
@@ -72,7 +68,7 @@ export default function Login() {
           <input
             {...register("lastname")}
             id="lastname"
-            className="input w-72"
+            className="input "
             type="text"
             placeholder="enter your last name"
           />
@@ -86,7 +82,7 @@ export default function Login() {
           <input
             {...register("maxCapacity", { valueAsNumber: true })}
             placeholder="max capacity"
-            className="input  w-72"
+            className="input"
             type="number"
             id="maxCapacity"
           />
