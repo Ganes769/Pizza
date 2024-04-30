@@ -10,13 +10,25 @@ import {
 import { useAppDispatch, useAppSelector } from "../hooks";
 import { totalCartPrice } from "../../CartSlice";
 import EmptyCart from "./EmptyCart";
+import { useCallback } from "react";
 
 export default function Cart() {
   const dispatch = useAppDispatch();
   const username = useAppSelector((state) => state.user.username);
   const cart = useSelector(getcart);
   const totalPrice = useSelector(totalCartPrice);
-
+  const handleIncreaseQuantity = useCallback(
+    (itemId: number) => {
+      dispatch(increaseQuantity(itemId));
+    },
+    [dispatch]
+  );
+  const handleDecreseQuantity = useCallback(
+    (itemid: number) => {
+      dispatch(decreaseQuantity(itemid));
+    },
+    [dispatch]
+  );
   return (
     <div className="px-4 py-3">
       {cart.length > 0 ? (
@@ -29,14 +41,14 @@ export default function Cart() {
                 <div className="flex items-center justify-between sm:gap-6">
                   <div className="flex items-center justify-center">
                     <div
-                      onClick={() => dispatch(increaseQuantity(item.id))}
+                      onClick={() => handleDecreseQuantity(item.id)}
                       className="bg-yellow-500 rounded-full flex cursor-pointer  h-9 w-9 justify-center items-center"
                     >
                       +
                     </div>
                     <p className="m-2">{item.quantity}</p>
                     <div
-                      onClick={() => dispatch(decreaseQuantity(item.id))}
+                      onClick={() => handleDecreseQuantity(item.id)}
                       className="bg-yellow-500 rounded-full flex cursor-pointer  h-9 w-9 justify-center items-center"
                     >
                       -
