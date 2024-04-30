@@ -41,7 +41,7 @@ export default function Login() {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <div className="w-1/2 mx-auto mt-3 2justify-center flex flex-col items-center  p-4 ">
+      <div className="w-1/2  mx-auto mt-3 2justify-center flex flex-col items-center  p-4 ">
         <h1 className="mb-8  text-xl font-semibold md:text-3xl">
           The best pizza.
           <br />
@@ -49,7 +49,7 @@ export default function Login() {
             Straight out of the oven, straight to you.
           </span>
         </h1>
-        <div className="p-2">
+        <div className="p-2 w-1/2">
           <input
             className="input"
             {...register("firstname")}
@@ -64,7 +64,7 @@ export default function Login() {
           )}
         </div>
 
-        <div className="m-2">
+        <div className="m-2 w-1/2">
           <input
             {...register("lastname")}
             id="lastname"
@@ -78,7 +78,7 @@ export default function Login() {
             </p>
           )}
         </div>
-        <div className="m-2">
+        <div className="m-2 w-1/2">
           <input
             {...register("maxCapacity", { valueAsNumber: true })}
             placeholder="max capacity"
@@ -95,7 +95,7 @@ export default function Login() {
 
         <input
           type="submit"
-          value="submit"
+          value="Submit"
           className="my-4 cursor-pointer bg-yellow-500 text-white px-4 py-2 rounded-lg "
         />
       </div>

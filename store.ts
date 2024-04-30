@@ -14,10 +14,13 @@ const reducer = combineReducers({
 });
 const persistedReducer = persistReducer(persistConfig, reducer);
 const store = configureStore({
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: false,
+    }),
   reducer: persistedReducer,
 });
 export const persister = persistStore(store);
 export default store;
 export type RootState = ReturnType<typeof store.getState>;
-// Inferred type: {posts: PostsState, comments: CommentsState, users: UsersState}
 export type AppDispatch = typeof store.dispatch;

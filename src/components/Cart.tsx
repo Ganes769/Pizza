@@ -36,7 +36,10 @@ export default function Cart() {
           <h2 className="mt-7 text-xl font-semibold">Your cart,{username}</h2>
           <ul className="mt-3 divide-y divide-stone-200 border-b">
             {cart.map((item: cartSliceType) => (
-              <div className="py-3 flex items-center sm:justify-between">
+              <div
+                key={item.id}
+                className="py-3 flex items-center sm:justify-between"
+              >
                 <p className="mb-1 sm:mb-0">{item.quantity}&times;</p>
                 <div className="flex items-center px-4 h-full justify-between gap-6">
                   <div className="flex items-center justify-center">
