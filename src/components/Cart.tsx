@@ -41,7 +41,7 @@ export default function Cart() {
                 <div className="flex items-center justify-between sm:gap-6">
                   <div className="flex items-center justify-center">
                     <div
-                      onClick={() => handleDecreseQuantity(item.id)}
+                      onClick={() => handleIncreaseQuantity(item.id)}
                       className="bg-yellow-500 rounded-full flex cursor-pointer  h-9 w-9 justify-center items-center"
                     >
                       +
