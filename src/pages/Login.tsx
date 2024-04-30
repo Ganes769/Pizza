@@ -1,10 +1,11 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { updateName } from "../../User";
-import { useAppSelector, useAppDispatch } from "../hooks";
-import { useForm } from "react-hook-form";
+import { useAppDispatch } from "../hooks";
+import { Controller, useForm } from "react-hook-form";
 import * as z from "zod";
 import { useNavigate } from "@tanstack/react-router";
 import toast from "react-hot-toast";
+import ErrorComponent from "../components/ErrorComponnet";
 
 export default function Login() {
   const dispatch = useAppDispatch();
@@ -14,16 +15,22 @@ export default function Login() {
     lastname: string;
     maxCapacity: number;
   };
+  const defaultValue: FormData = {
+    firstname: "",
+    lastname: "",
+    maxCapacity: 1,
+  };
   const schema: z.ZodType<FormData> = z.object({
     firstname: z.string().min(1, { message: "First name is required" }),
     lastname: z.string().min(1, { message: "Last name is required" }),
     maxCapacity: z
       .number({ message: "capacity cannot be empty" })
-      .min(1, { message: "capacity should be greater than 1" })
+      .min(0, { message: "capacity should be greater than 1" })
       .max(100, { message: "max capacity is 100" }),
   });
 
   function onSubmit(data: FormData) {
+    console.log(data.firstname, data.lastname, data.maxCapacity);
     dispatch(updateName(data.firstname));
     toast.success(`Hello ${data.firstname}`);
 
@@ -31,7 +38,6 @@ export default function Login() {
       to: "/menu",
     });
   }
-
   type FormValues = z.infer<typeof schema>;
   const { register, control, handleSubmit, formState } = useForm<FormValues>({
     resolver: zodResolver(schema),
@@ -50,49 +56,63 @@ export default function Login() {
           </span>
         </h1>
         <div className="p-2 w-1/2">
-          <input
-            className="input"
-            {...register("firstname")}
-            type="text"
-            id="lastname"
-            placeholder="enter your last name"
+          <Controller
+            defaultValue={defaultValue.firstname}
+            control={control}
+            name="firstname"
+            render={({ field }) => (
+              <input
+                placeholder="enter the title..."
+                className="input"
+                {...field}
+              />
+            )}
           />
           {errors.firstname && (
-            <p className="mt-2 rounded-md bg-red-100 p-2 text-xs text-red-700">
-              {errors.firstname.message}
-            </p>
+            <ErrorComponent>{errors.firstname.message}</ErrorComponent>
           )}
         </div>
 
         <div className="m-2 w-1/2">
-          <input
-            {...register("lastname")}
-            id="lastname"
-            className="input "
-            type="text"
-            placeholder="enter your last name"
+          <Controller
+            defaultValue={defaultValue.lastname}
+            control={control}
+            name="lastname"
+            render={({ field }) => (
+              <input
+                {...field}
+                id="lastname"
+                className="input "
+                type="text"
+                placeholder="enter your last name"
+              />
+            )}
           />
+
           {errors.lastname && (
-            <p className="mt-2 rounded-md bg-red-100 p-2 text-xs text-red-700">
-              {errors.lastname.message}
-            </p>
+            <ErrorComponent>{errors.lastname.message}</ErrorComponent>
           )}
         </div>
         <div className="m-2 w-1/2">
-          <input
-            {...register("maxCapacity", { valueAsNumber: true })}
-            placeholder="max capacity"
-            className="input"
-            type="number"
-            id="maxCapacity"
+          <Controller
+            defaultValue={defaultValue.maxCapacity}
+            control={control}
+            name="maxCapacity"
+            render={({ field }) => (
+              <input
+                {...field}
+                placeholder="max capacity"
+                className="input"
+                type="number"
+                id="maxCapacity"
+              />
+            )}
           />
+
           {errors.maxCapacity && (
-            <p className="mt-2 rounded-md bg-red-100 p-2 text-xs text-red-700">
-              {errors.maxCapacity.message}
-            </p>
+            <ErrorComponent>{errors.maxCapacity.message}</ErrorComponent>
           )}
         </div>
-
         <input
           type="submit"
           value="Submit"

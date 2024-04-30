@@ -6,6 +6,7 @@ export interface menuItem {
   totalPrice: number;
   imageUrl: string;
   quantity: number;
+  
 }
 
 export interface menuProps {
