@@ -39,7 +39,7 @@ export default function Login() {
     });
   }
   type FormValues = z.infer<typeof schema>;
-  const { register, control, handleSubmit, formState } = useForm<FormValues>({
+  const { control, handleSubmit, formState } = useForm<FormValues>({
     resolver: zodResolver(schema),
   });
   const { errors } = formState;
@@ -55,7 +55,10 @@ export default function Login() {
             Straight out of the oven, straight to you.
           </span>
         </h1>
-        <div className="p-2 w-1/2">
+        <div className="p-6 w-1/2 relative">
+          <p className="absolute text-xs ml-4 top-3 px-2 text-white bg-yellow-500">
+            firstname
+          </p>
           <Controller
             defaultValue={defaultValue.firstname}
             control={control}
@@ -73,7 +76,10 @@ export default function Login() {
           )}
         </div>
 
-        <div className="m-2 w-1/2">
+        <div className="p-6 w-1/2 relative">
+          <p className="absolute text-xs ml-4 top-3 px-2   text-white bg-yellow-500">
+            Lastname
+          </p>
           <Controller
             defaultValue={defaultValue.lastname}
             control={control}
@@ -93,7 +99,10 @@ export default function Login() {
             <ErrorComponent>{errors.lastname.message}</ErrorComponent>
           )}
         </div>
-        <div className="m-2 w-1/2">
+        <div className="p-6 w-1/2 relative ">
+          <p className="absolute text-xs ml-4 top-3 px-2 text-white bg-yellow-500">
+            maxcapacity
+          </p>
           <Controller
             defaultValue={defaultValue.maxCapacity}
             control={control}
@@ -101,7 +110,7 @@ export default function Login() {
             render={({ field }) => (
               <input
                 {...field}
-                placeholder="max capacity"
+                placeholder="...max capacity"
                 className="input"
                 type="number"
                 id="maxCapacity"
@@ -119,6 +128,7 @@ export default function Login() {
           className="my-4 cursor-pointer bg-yellow-500 text-white px-4 py-2 rounded-lg "
         />
       </div>
+      <div className="w-1/2 mx-auto mt-10"></div>
     </form>
   );
 }
