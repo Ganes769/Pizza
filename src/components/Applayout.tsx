@@ -1,5 +1,4 @@
 import Header from "./Header";
-
 import { Outlet } from "@tanstack/react-router";
 import { useAppSelector } from "../hooks";
 import { Link } from "@tanstack/react-router";

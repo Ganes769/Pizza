@@ -30,15 +30,15 @@ export default function Cart() {
     [dispatch]
   );
   return (
-    <div className="px-4 py-3">
+    <div className="px-4 py-4">
       {cart.length > 0 ? (
         <div>
           <h2 className="mt-7 text-xl font-semibold">Your cart,{username}</h2>
           <ul className="mt-3 divide-y divide-stone-200 border-b">
             {cart.map((item: cartSliceType) => (
-              <li className="py-3 sm:flex sm:items-center sm:justify-between">
+              <div className="py-3 flex items-center sm:justify-between">
                 <p className="mb-1 sm:mb-0">{item.quantity}&times;</p>
-                <div className="flex items-center justify-between sm:gap-6">
+                <div className="flex items-center px-4 h-full justify-between gap-6">
                   <div className="flex items-center justify-center">
                     <div
                       onClick={() => handleIncreaseQuantity(item.id)}
@@ -54,17 +54,20 @@ export default function Cart() {
                       -
                     </div>
                   </div>
-                  <p className="text-sm font-bold">{item.totalPrice} $</p>
-                  <p className="text-sm font-bold">{item.name}</p>
+                  <div>
+                    <p className="text-sm font-bold px-4">
+                      {item.totalPrice} $
+                    </p>
+                    <p className="text-sm font-bold px-4">{item.name}</p>
+                  </div>
                   <button
                     onClick={() => dispatch(deleteItem(item.id))}
-                    className="bg-yellow-500 rounded-md h-8 font-semibold w-32
-                text-sm "
+                    className="bg-yellow-500 rounded-md h-8 font-semibold w-32 text-sm "
                   >
                     Delete from cart
                   </button>
                 </div>
-              </li>
+              </div>
             ))}
             <div className="flex justify-between">
               <p>Total price</p>

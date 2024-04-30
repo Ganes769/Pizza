@@ -33,7 +33,7 @@ export default function Login() {
   }
 
   type FormValues = z.infer<typeof schema>;
-  const { register, handleSubmit, formState } = useForm<FormValues>({
+  const { register, control, handleSubmit, formState } = useForm<FormValues>({
     resolver: zodResolver(schema),
   });
   const { errors } = formState;
@@ -96,7 +96,7 @@ export default function Login() {
         <input
           type="submit"
           value="submit"
-          className=" cursor-pointer bg-yellow-500 text-white px-4 py-2 rounded-lg "
+          className="my-4 cursor-pointer bg-yellow-500 text-white px-4 py-2 rounded-lg "
         />
       </div>
     </form>

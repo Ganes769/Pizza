@@ -1,14 +1,15 @@
 import { menuItem, menuProps } from "../Types/type";
-
 import { useAppDispatch } from "../hooks";
 import { addtocart } from "../../CartSlice";
 import { toast } from "react-hot-toast";
+import Button from "./Button";
 
 export default function MenuItems({ menu }: menuProps) {
   const dispatch = useAppDispatch();
   function handleAdd(data: menuItem) {
     const newItem = {
       id: data.id,
+      soldOut: data.soldOut,
       name: data.name,
       totalPrice: data.unitPrice,
       imageUrl: data.imageUrl,
@@ -40,13 +41,23 @@ export default function MenuItems({ menu }: menuProps) {
                 <p>price:{data.unitPrice} $</p>
               </div>
             </div>
-
-            <button
-              onClick={() => handleAdd(data)}
-              className="bg-yellow-500 rounded-md h-8 font-semibold w-32 text-sm "
-            >
-              Add To Cart
-            </button>
+            {data.soldOut == true ? (
+              <Button
+                disable="cursor-not-allowed"
+                textColor="text-white"
+                buttonBackGround="bg-gray-800"
+              >
+                Sold Out
+              </Button>
+            ) : (
+              <Button
+                onClick={() => handleAdd(data)}
+                buttonBackGround="bg-yellow-500"
+                textColor="text-black"
+              >
+                Add To Cart
+              </Button>
+            )}
           </div>
         </div>
       ))}

@@ -4,7 +4,6 @@ const initstate: addToCartType = {
   cart: [],
 };
 
-console.log(initstate);
 const cartSlice = createSlice({
   name: "cart",
   initialState: initstate,
